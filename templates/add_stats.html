@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Add Stats | Cyber Oasis{% endblock %}
+{% block content %}
+<div class="add-game-background">
+    <div class="add-game-card animate-in">
+        <h1 class="glow-title">🎮 Add Game Stats</h1>
+        <form method="POST">
+            <label for="game_title">Game Title</label>
+            <input type="text" id="game_title" name="game_title" placeholder="Enter game name" required>
+
+            <label for="platform">Platform</label>
+            <select id="platform" name="platform" required>
+                <option value="" disabled selected>Select platform</option>
+                <option value="PC">PC</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Console">Console</option>
+            </select>
+
+            <label for="playtime">Playtime (in hours)</label>
+            <input type="number" step="0.1" id="playtime" name="playtime" placeholder="e.g., 2.5" required>
+
+            <label for="remarks">Remarks (optional)</label>
+            <input type="text" id="remarks" name="remarks" placeholder="Any notes...">
+
+            <button type="submit" class="glow-button">➕ Add Stats</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

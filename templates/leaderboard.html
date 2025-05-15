@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard | Cyber Oasis{% endblock %}
+{% block content %}
+<div class="leaderboard-container">
+    <h2 class="section-title">🏆 Leaderboard</h2>
+
+    <div class="platform-card pc-board">
+        <h3>PC</h3>
+        <table class="leaderboard-table pc-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>PC Playtime (hours)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if pc_leaders %}
+                    {% for leader in pc_leaders %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ leader.Username }}</td>
+                            <td>{{ "%.1f"|format(leader.total_playtime) }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="3">No data found.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="platform-card mobile-board">
+        <h3>Mobile</h3>
+        <table class="leaderboard-table mobile-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Mobile Playtime (hours)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if mobile_leaders %}
+                    {% for leader in mobile_leaders %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ leader.Username }}</td>
+                            <td>{{ "%.1f"|format(leader.total_playtime) }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="3">No data found.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="platform-card console-board">
+        <h3>Console</h3>
+        <table class="leaderboard-table console-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Console Playtime (hours)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if console_leaders %}
+                    {% for leader in console_leaders %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ leader.Username }}</td>
+                            <td>{{ "%.1f"|format(leader.total_playtime) }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="3">No data found.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

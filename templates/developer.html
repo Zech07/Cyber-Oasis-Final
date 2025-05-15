@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Developer | Cyber Oasis{% endblock %}
+{% block content %}
+<div class="developer-background">
+    <div class="developer-container">
+        <h1 class="glow-title">🚀 Meet the Legendary Developers</h1>
+        <div class="dev-cards">
+            <div class="dev-card">
+                <img src="{{ url_for('static', filename='Zech.jpg') }}" alt="Developer Avatar" class="avatar">
+                <h2>Zech Cambel</h2>
+                <a href="https://zech07.github.io/_Portfolio_/" target="_blank" class="glow-button">Visit Portfolio</a>
+            </div>
+        </div>
+    </div>
+    <!-- SVG Glowing Background -->
+    <svg class="animated-bg" viewBox="0 0 800 600">
+        <defs>
+            <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:#00ffff; stop-opacity:0.2" />
+                <stop offset="100%" style="stop-color:#000000; stop-opacity:0" />
+            </radialGradient>
+        </defs>
+        <circle cx="400" cy="300" r="300" fill="url(#grad1)">
+            <animate attributeName="r" values="300;350;300" dur="10s" repeatCount="indefinite" />
+        </circle>
+    </svg>
+</div>
+{% endblock %}

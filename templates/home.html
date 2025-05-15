@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Home | Cyber Oasis{% endblock %}
+{% block content %}
+<div class="glass-card">
+    <h1 class="section-title">Welcome to Cyber Oasis</h1>
+    <p>Track your recent games and stats!</p>
+</div>
+
+<div class="glass-card">
+    <h3>🌐 All Games Played by Users</h3>
+    {% if games_stats %}
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+            {% for game in games_stats %}
+                {% set card_class = 'pc-glow' if game.platform == 'pc' else 'console-glow' if game.platform == 'console' else 'mobile-glow' %}
+                {% set title_class = 'pc-title' if game.platform == 'pc' else 'console-title' if game.platform == 'console' else 'mobile-title' %}
+                
+                <div class="game-card {{ card_class }}">
+                    <h2 class="game-title {{ title_class }}">{{ game.name }}</h2>
+                    <p>Platform: {{ game.platform }}</p>
+                    <p>Players: {{ game.player_count }}</p>
+                    <p>Total Playtime: {{ '%.1f' % game.total_playtime }} hrs</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No games found in community records yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Library | Cyber Oasis{% endblock %}
+{% block content %}
+<div class="glass-card">
+    <h2 class="section-title">📚 Your Library</h2>
+    {% if stats %}
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+            {% for stat in stats %}
+                {% set platform = stat[1]|lower %}
+                {% set card_class = 'pc-glow' if platform == 'pc' else 'console-glow' if platform == 'console' else 'mobile-glow' %}
+                {% set title_class = 'pc-title' if platform == 'pc' else 'console-title' if platform == 'console' else 'mobile-title' %}
+
+                <div class="game-card {{ card_class }}">
+                    <h2 class="game-title {{ title_class }}">{{ stat[0] }}</h2>
+                    <p><strong>{{ stat[2] }}</strong> hours on {{ stat[1]|capitalize }}</p>
+                    {% if stat[3] %}
+                        <p><em>Remarks:</em> {{ stat[3] }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You have no games tracked yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

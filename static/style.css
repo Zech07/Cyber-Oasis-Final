@@ -1,0 +1,907 @@
+* 
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  body {
+    background-color: #0b0b1a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .auth-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .auth-box {
+    background-color: #1a1a2e;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .auth-box h2 {
+    color: #9b59b6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-box input {
+    width: 100%;
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #2c2c3c;
+    color: white;
+  }
+  
+  .auth-buttons button {
+    margin: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #9b59b6;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .app {
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #161622;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+  }
+  
+  .sidebar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #9b59b6;
+  }
+  
+  .tab {
+    background: none;
+    border: none;
+    padding: 0.8rem;
+    text-align: left;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .tab.active {
+    background-color: #9b59b6;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #0b0b1a;
+    overflow-y: auto;
+  }
+  
+  .header {
+    font-size: 24px;
+    color: #9b59b6;
+    margin-bottom: 1rem;
+  }
+  
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .game-card {
+    background-color: #1a1a2e;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .game-card img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .platform-filters button.active {
+    background-color: #9b59b6;
+  }
+  
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  
+  .feature {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(196, 6, 239, 0.137);
+  }
+  
+  .feature h3 {
+    margin-top: 1rem;
+    color: #ca15f7;
+  }
+  
+  .search-filter input {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    border: none;
+  }
+  
+  .platform-filters {
+    margin-bottom: 1rem;
+  }
+  
+  .platform-filters button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #2c2c3c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .container {
+    margin-top: 2rem;
+  }
+  
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .profile-container h2 {
+    color: #9b59b6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-container input,
+  .profile-container textarea {
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    background-color: #2c2c3c;
+    color: white;
+    border: none;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .profile-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-container button {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .profile-container button:hover {
+    background-color: #7e4ba1;
+  }
+  
+  .leaderboard {
+    margin-top: 2rem;
+  }
+  
+  .leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .leaderboard th,
+  .leaderboard td {
+    padding: 0.8rem;
+    text-align: center;
+    border: 1px solid #444;
+  }
+  
+  .profile-container input[type="file"] {
+    margin-top: 1rem;
+  }
+  
+  .optional {
+    display: none;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 5px;
+    background-color: #2c2c3c;
+    color: white;
+    border: none;
+  }
+  
+  .btn {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #7e4ba1;
+  }
+  
+  .flash-message {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+  }
+  
+  .flash-success {
+    background-color: rgba(39, 174, 96, 0.3);
+    border: 1px solid #27ae60;
+  }
+  
+  .flash-error {
+    background-color: rgba(231, 76, 60, 0.3);
+    border: 1px solid #e74c3c;
+  }
+  
+  .flex-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  @media (min-width: 768px) {
+    .optional {
+      display: table-cell;
+    }
+  }
+
+  .profile-summary p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #eee;
+}
+
+.platform-section {
+  margin-top: 2rem;
+}
+
+.platform-section h3 {
+  color: #ca15f7;
+  margin-bottom: 0.5rem;
+}
+
+.platform-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.platform-section li {
+  background-color: #1a1a2e;
+  margin-bottom: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  color: #eee;
+}
+
+.platform-section li span {
+  font-weight: bold;
+}
+
+/* Apply Orbitron font globally */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+}
+
+/* Video Background */
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.3);
+}
+
+/* Center container */
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+}
+
+/* Separated Logos */
+.logo-text {
+    position: relative;
+    top: -40px;
+    width: 320px;
+    left: 25%;
+    margin-bottom: -40px;
+    filter: drop-shadow(0 0 20px #ff00f7) drop-shadow(0 0 40px #8e00ff);
+    animation: float 6s ease-in-out infinite;
+}
+
+.logo-icon {
+    position: relative;
+    width: 180px;
+    left: -43%;
+    filter: drop-shadow(0 0 20px #ff00f7) drop-shadow(0 0 40px #8e00ff);
+    animation: float 5s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+/* Floating animation */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Login/Register Card */
+.login-card {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 300px;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.login-card input,
+.login-card button,
+.signup-btn {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-card input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #1e1e1e;
+    color: white;
+}
+
+.login-card button {
+    padding: 10px;
+    background: #a000ff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-card button:hover {
+    background: #d400ff;
+}
+
+.signup-btn {
+    color: #ff00f7;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.signup-btn:hover {
+    text-decoration: underline;
+}
+
+.register-question {
+    color: #ccc;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.gold-particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: fly-away 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes fly-away {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-50px + 100px * var(--randX, 0.5)),
+            calc(-50px + 100px * var(--randY, 0.5))
+        ) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.logo-with-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.sidebar-logo-glow {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.logo-text-sidebar {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #9b59b6;
+    text-shadow: 0 0 5px #ff00f7;
+}
+
+.gold-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Ensure the sidebar logo container is positioned relative for particle emission */
+#logo-glow-container {
+    position: relative;
+}
+
+/* Logo container always glowing */
+#logo-glow {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    transition: filter 0.4s ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(147, 112, 219, 0.7))
+            drop-shadow(0 0 20px rgba(147, 112, 219, 0.5))
+            drop-shadow(0 0 30px rgba(147, 112, 219, 0.3));
+}
+
+/* On hover, intensify white glow */
+#logo-glow:hover {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 40px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 60px rgba(255, 255, 255, 0.3));
+}
+
+/* White particle effect */
+.gold-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    background: radial-gradient(circle, white, transparent 70%);
+    filter: blur(1px);
+    opacity: 1;
+    animation: fly-away 1s ease-out forwards;
+}
+
+@keyframes fly-away {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-50px + 100px * var(--randX, 0.5)),
+            calc(-50px + 100px * var(--randY, 0.5))
+        ) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Particle styling */
+.gold-particle {
+  position: fixed;
+  background: radial-gradient(circle, #ffd700, #ffa500);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* --- Glowing Game Cards --- */
+.game-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(8px);
+    color: #fff;
+    margin: 1rem;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Platform-specific glow */
+.pc-glow {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 0 0 50px rgba(255, 0, 0, 0.2);
+}
+
+.console-glow {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6), 0 0 50px rgba(0, 255, 0, 0.2);
+}
+
+.mobile-glow {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 50px rgba(255, 215, 0, 0.2);
+}
+
+/* Glowing Game Title */
+.game-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.pc-title {
+    color: #ff4d4d;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.console-title {
+    color: #4dff4d;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+.mobile-title {
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.section-title {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.platform-card {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.platform-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.leaderboard-table thead th {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Platform-specific glowing border */
+.pc-board {
+    border: 2px solid rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.mobile-board {
+    border: 2px solid rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.console-board {
+    border: 2px solid rgba(0, 255, 0, 0.6);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+}
+
+/* Optional subtle animations */
+.platform-card:hover {
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+.developer-background {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animated-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.developer-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.glow-title {
+    font-size: 3rem;
+    color: #00f0ff;
+    text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
+    margin-bottom: 50px;
+    animation: pulse 3s infinite alternate;
+}
+
+.dev-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.dev-card {
+    background: linear-gradient(145deg, #111122, #0f0f1f);
+    border-radius: 20px;
+    padding: 30px;
+    width: 250px;
+    box-shadow: 0 0 30px #00ffff55;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: center;
+}
+
+.dev-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 60px #00ffff99;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff55;
+    margin-bottom: 20px;
+}
+
+.glow-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00ffff88;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.glow-button:hover {
+    background: #00ffff22;
+    box-shadow: 0 0 30px #00ffffcc;
+}
+
+@keyframes pulse {
+    from {
+        text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
+    }
+    to {
+        text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff, 0 0 90px #00ffff;
+    }
+}
+
+.add-game-background {
+    background: #0a0a14;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-game-card {
+    background: linear-gradient(145deg, #111122, #0f0f1f);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px #00ffff44;
+    width: 400px;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    animation: slideIn 1s forwards ease-out;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.add-game-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-game-card label {
+    color: #00ffff;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffffaa;
+}
+
+.add-game-card input,
+.add-game-card select {
+    background: #0a0a1a;
+    border: 1px solid #00ffff33;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    box-shadow: 0 0 10px #00ffff22 inset;
+    outline: none;
+    transition: box-shadow 0.3s, border 0.3s;
+}
+
+.add-game-card input:focus,
+.add-game-card select:focus {
+    box-shadow: 0 0 15px #00ffffaa inset;
+    border-color: #00ffffaa;
+}
+
+.glow-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #00f0ff;
+    text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
+    margin-bottom: 30px;
+    animation: pulse 3s infinite alternate;
+}
+
+.glow-button {
+    margin-top: 20px;
+    padding: 12px;
+    background: transparent;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff99;
+    box-shadow: 0 0 15px #00ffff88;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.glow-button:hover {
+    background: #00ffff22;
+    box-shadow: 0 0 30px #00ffffcc;
+}
+
+@keyframes pulse {
+    from {
+        text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
+    }
+    to {
+        text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff, 0 0 90px #00ffff;
+    }
+}
