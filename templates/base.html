@@ -5,31 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Cyber Oasis{% endblock %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  <div class="flex-container">
 
-    <div class="sidebar">
-      <div class="logo-with-text" id="logo-glow-container">
-        <img src="{{ url_for('static', filename='CyberOasisLogo3.png') }}" alt="Logo" id="logo-glow" class="sidebar-logo-glow">
-        <div class="logo-text-sidebar">CYBER OASIS</div>
-      </div>
+    <video autoplay muted loop id="video-background">
+        <source src="{{ url_for('static', filename='FateLibrary.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
-      <a href="{{ url_for('main.home') }}" class="tab">🏠 Home</a>
-      <a href="{{ url_for('main.dashboard') }}" class="tab">📚 Library</a>
-      <a href="{{ url_for('main.leaderboard') }}" class="tab">🏆 Leaderboard</a>
-      <a href="{{ url_for('main.add_stats') }}" class="tab">🎮 Add Game</a>
-      <a href="{{ url_for('main.developer') }}" class="tab">👨‍💻 Developer</a>
-      <a href="{{ url_for('main.logout') }}" class="tab">🔓 Logout</a>
+    <div class="flex-container">
+        <div class="sidebar">
+            <div class="logo-with-text" id="logo-glow-container">
+                <img src="{{ url_for('static', filename='CyberOasisLogo3.png') }}" alt="Logo" id="logo-glow" class="sidebar-logo-glow">
+                <div class="logo-text-sidebar">CYBER OASIS</div>
+            </div>
+
+            <a href="{{ url_for('main.home') }}" class="tab">🏠 Home</a>
+            <a href="{{ url_for('main.dashboard') }}" class="tab">📚 Library</a>
+            <a href="{{ url_for('main.leaderboard') }}" class="tab">🏆 Leaderboard</a>
+            <a href="{{ url_for('main.add_stats') }}" class="tab">🎮 Add Game</a>
+            <a href="{{ url_for('main.developer') }}" class="tab">👨‍💻 Developer</a>
+            <a href="{{ url_for('main.logout') }}" class="tab">🔓 Logout</a>
+        </div>
+
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 
-    <div class="main-content">
-      {% block content %}{% endblock %}
-    </div>
+    <script src="{{ url_for('static', filename='logoParticle.js') }}"></script>
 
-  </div>
+    <!-- Video Resume Script -->
+    <script>
+        const video = document.getElementById('video-background');
 
-  <script src="{{ url_for('static', filename='logoParticle.js') }}"></script>
+        // Resume from last saved time if exists
+        const savedTime = localStorage.getItem('backgroundVideoTime');
+        if (savedTime) {
+            video.currentTime = parseFloat(savedTime);
+        }
+
+        // Save video time every second
+        setInterval(() => {
+            if (!video.paused) {
+                localStorage.setItem('backgroundVideoTime', video.currentTime);
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>

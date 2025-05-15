@@ -7,7 +7,6 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def home():
-    # Get all games that have been played by any user along with player counts and total playtime
     games_stats = (
         db.session.query(
             Game.name,
@@ -20,9 +19,7 @@ def home():
         .order_by(func.sum(Stat.playtime).desc())
         .all()
     )
-
-    return render_template('home.html', games_stats=games_stats)
-
+    return render_template('home.html', games_stats=games_stats, background_video_url="https://cdn.coverr.co/videos/coverr-sci-fi-dome-1234/1080p.mp4")
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -35,7 +32,7 @@ def login():
             return redirect(url_for('main.dashboard'))
         else:
             flash('Invalid credentials.')
-    return render_template('login.html')
+    return render_template('login.html', background_video_url="https://cdn.coverr.co/videos/coverr-abstract-lights-5678/1080p.mp4")
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -53,7 +50,7 @@ def register():
             db.session.commit()
             flash('Registration successful. You can now log in.')
             return redirect(url_for('main.login'))
-    return render_template('register.html')
+    return render_template('register.html', background_video_url="https://cdn.coverr.co/videos/coverr-abstract-lights-5678/1080p.mp4")
 
 @bp.route('/logout')
 @login_required
@@ -75,7 +72,7 @@ def dashboard():
         .filter(Stat.user_id == current_user.id)
         .all()
     )
-    return render_template('dashboard.html', stats=stats)
+    return render_template('dashboard.html', stats=stats, background_video_url="https://cdn.coverr.co/videos/coverr-futuristic-tunnel-7464/1080p.mp4")
 
 @bp.route('/add_stats', methods=['GET', 'POST'])
 @login_required
@@ -90,14 +87,12 @@ def add_stats():
             flash('Invalid platform selected.', 'danger')
             return redirect(url_for('main.add_stats'))
 
-        # Fix: Search by both name and platform
         game = Game.query.filter_by(name=game_title, platform=platform).first()
         if not game:
             game = Game(name=game_title, platform=platform)
             db.session.add(game)
             db.session.commit()
 
-        # Check if the stat exists for the current user and this game
         stat = Stat.query.filter_by(user_id=current_user.id, game_id=game.id).first()
         if stat:
             stat.playtime += playtime
@@ -111,7 +106,7 @@ def add_stats():
         flash('Stats updated successfully!', 'success')
         return redirect(url_for('main.dashboard'))
 
-    return render_template('add_stats.html')
+    return render_template('add_stats.html', background_video_url="https://cdn.coverr.co/videos/coverr-cyberpunk-street-1234/1080p.mp4")
 
 @bp.route('/leaderboard')
 @login_required
@@ -131,14 +126,14 @@ def leaderboard():
     mobile_leaders = get_leaders('mobile')
     console_leaders = get_leaders('console')
 
-    return render_template('leaderboard.html', pc_leaders=pc_leaders, mobile_leaders=mobile_leaders, console_leaders=console_leaders)
+    return render_template('leaderboard.html', pc_leaders=pc_leaders, mobile_leaders=mobile_leaders, console_leaders=console_leaders, background_video_url="https://cdn.coverr.co/videos/coverr-hologram-street-9876/1080p.mp4")
 
 @bp.route('/library')
 @login_required
 def library():
     games = Game.query.all()
-    return render_template('library.html', games=games)
+    return render_template('library.html', games=games, background_video_url="https://cdn.coverr.co/videos/coverr-virtual-arcade-1357/1080p.mp4")
 
 @bp.route('/developer')
 def developer():
-    return render_template('developer.html')
+    return render_template('developer.html', background_video_url="https://cdn.coverr.co/videos/coverr-hacker-terminal-9999/1080p.mp4")

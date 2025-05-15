@@ -7,7 +7,7 @@
   }
   
   body {
-    background-color: #0b0b1a;
+    background: none;
     color: white;
     display: flex;
     flex-direction: column;
@@ -58,14 +58,16 @@
     height: 100vh;
   }
   
-  .sidebar {
+.sidebar {
     width: 200px;
-    background-color: #161622;
+    background-color: rgba(22, 22, 34, 0.95); /* Slight transparency if desired */
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    height: 100%;
-  }
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
   
   .sidebar .logo {
     font-size: 20px;
@@ -92,12 +94,15 @@
     background-color: #9b59b6;
   }
   
-  .main-content {
+.main-content {
     flex: 1;
     padding: 2rem;
-    background-color: #0b0b1a;
+    background: transparent;
     overflow-y: auto;
-  }
+    position: relative;
+    z-index: 5;
+}
+
   
   .header {
     font-size: 24px;
@@ -753,8 +758,8 @@ body, html {
 .dev-cards {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .dev-card {
@@ -782,21 +787,22 @@ body, html {
 }
 
 .glow-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
     text-decoration: none;
-    background: transparent;
-    border: 2px solid #00ffff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #00ffff88;
-    transition: background 0.3s, box-shadow 0.3s;
 }
 
 .glow-button:hover {
-    background: #00ffff22;
-    box-shadow: 0 0 30px #00ffffcc;
+    color: #00ffff;
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+    transform: scale(1.3);
 }
 
 @keyframes pulse {
@@ -809,7 +815,6 @@ body, html {
 }
 
 .add-game-background {
-    background: #0a0a14;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -904,4 +909,30 @@ body, html {
     to {
         text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff, 0 0 90px #00ffff;
     }
+}
+
+/* Video Background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -9999;
+    filter: brightness(0.3);
+    pointer-events: none; /* Prevent any clicks from interacting with video */
+}
+
+/* Login/Register Centered Card */
+.login-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.75);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    z-index: 10;
 }
