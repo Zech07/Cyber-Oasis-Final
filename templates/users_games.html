@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}All Players{% endblock %}
+{% block content %}
+<h1 class="page-title neon-text">All Players</h1>
+
+<div class="players-container">
+    {% for user in user_data %}
+        <div class="player-card neon-card">
+            <img src="{{ url_for('static', filename=user.profile_picture or 'uploads/default.png') }}" alt="Profile Picture" class="player-image">
+            <h2 class="player-username">{{ user.username }}</h2>
+            <ul class="game-list">
+                {% for game in user.games %}
+                    <li>{{ game }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

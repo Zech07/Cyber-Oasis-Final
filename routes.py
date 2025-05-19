@@ -144,19 +144,20 @@ def developer():
 @login_required
 def users_games():
     users = User.query.all()
-    stats = Stat.query.all()
-    games = Game.query.all()
 
-    user_game_map = {}
-    for stat in stats:
-        user = User.query.get(stat.user_id)
-        game = Game.query.get(stat.game_id)
-        if user and game:
-            if user.username not in user_game_map:
-                user_game_map[user.username] = []
-            user_game_map[user.username].append(game.name)
+    user_data = []
 
-    return render_template('users_games.html', user_game_map=user_game_map)
+    for user in users:
+        games = [stat.game.name for stat in user.stats]
+        user_data.append({
+            'username': user.username,
+            'profile_picture': user.profile_picture or 'uploads/default.png',
+
+            'games': games
+        })
+
+    return render_template('users_games.html', user_data=user_data)
+
 
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required
@@ -167,15 +168,18 @@ def profile():
         user.Age = request.form.get('age')
         user.Quote = request.form.get('quote')
 
-        # Optional: handle image upload
         image = request.files.get('profile_image')
         if image and image.filename:
             filename = secure_filename(image.filename)
-            image.save(os.path.join('static/uploads', filename))
-            user.Profile_Image = f'uploads/{filename}'
+            upload_path = os.path.join('static', 'uploads')
+            os.makedirs(upload_path, exist_ok=True)
+            image_path = os.path.join(upload_path, filename)
+            image.save(image_path)
+            user.profile_picture = f'uploads/{filename}'  # ✅ use correct field
 
         db.session.commit()
         flash('Profile updated!', 'success')
         return redirect(url_for('main.profile'))
 
     return render_template('profile.html', user=user)
+
