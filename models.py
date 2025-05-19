@@ -38,3 +38,19 @@ class Stat(db.Model):
     # Relationships
     user = db.relationship('User', back_populates='stats')
     game = db.relationship('Game', back_populates='stats')
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
+
+    # New fields for profile
+    Age = db.Column(db.Integer)
+    Quote = db.Column(db.Text)
+    Profile_Image = db.Column(db.String(300))  # path to uploaded image
+
+    # Relationship to Stats
+    stats = db.relationship('Stat', back_populates='user', cascade='all, delete-orphan')
+

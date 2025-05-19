@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <h2>{{ user.username }}'s Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Age:</label>
+        <input type="number" name="age" value="{{ user.Age or '' }}">
+
+        <label>Quote:</label>
+        <textarea name="quote">{{ user.Quote or '' }}</textarea>
+
+        <label>Profile Image:</label>
+        <input type="file" name="profile_image">
+        {% if user.Profile_Image %}
+            <img src="{{ url_for('static', filename=user.Profile_Image) }}" alt="Profile Image">
+        {% endif %}
+
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% endblock %}

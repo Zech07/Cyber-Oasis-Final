@@ -1,3 +1,5 @@
+import os
+from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from models import db, User, Game, Stat
@@ -137,3 +139,43 @@ def library():
 @bp.route('/developer')
 def developer():
     return render_template('developer.html', background_video_url="https://cdn.coverr.co/videos/coverr-hacker-terminal-9999/1080p.mp4")
+
+@bp.route('/users_games')
+@login_required
+def users_games():
+    users = User.query.all()
+    stats = Stat.query.all()
+    games = Game.query.all()
+
+    user_game_map = {}
+    for stat in stats:
+        user = User.query.get(stat.user_id)
+        game = Game.query.get(stat.game_id)
+        if user and game:
+            if user.username not in user_game_map:
+                user_game_map[user.username] = []
+            user_game_map[user.username].append(game.name)
+
+    return render_template('users_games.html', user_game_map=user_game_map)
+
+@bp.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    user = User.query.get(current_user.id)
+
+    if request.method == 'POST':
+        user.Age = request.form.get('age')
+        user.Quote = request.form.get('quote')
+
+        # Optional: handle image upload
+        image = request.files.get('profile_image')
+        if image and image.filename:
+            filename = secure_filename(image.filename)
+            image.save(os.path.join('static/uploads', filename))
+            user.Profile_Image = f'uploads/{filename}'
+
+        db.session.commit()
+        flash('Profile updated!', 'success')
+        return redirect(url_for('main.profile'))
+
+    return render_template('profile.html', user=user)

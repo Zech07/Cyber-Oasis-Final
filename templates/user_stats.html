@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}All Players{% endblock %}
+{% block content %}
+<div class="leaderboard-container">
+    <h2 class="section-title">🎮 All Users and Their Games</h2>
+    {% for username, games in user_game_map.items() %}
+        <div class="platform-card">
+            <h3>{{ username }}</h3>
+            <ul>
+                {% for game in games %}
+                    <li>{{ game }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
